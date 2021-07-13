@@ -33,7 +33,7 @@ app.listen(port, host, () => {
     console.log("--------------------------------");
     console.log("--------------------------------");
     console.log("   Santuke HAS BEEN SUMMONED    ");
-    console.log("           {HOST}:" + port + "          ");
+    console.log("           " + host + ":" + port + "          ");
     console.log("--------------------------------");
     console.log("--------------------------------");
 });
