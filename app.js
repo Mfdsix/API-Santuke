@@ -8,7 +8,7 @@ const Log = require('./utils/log');
 const swaggerDocument = require('./swagger.json');
 const app = express();
 const host = process.env.HOST || '0.0.0.0';
-const port = process.env.POST || 5000;
+const port = process.env.PORT || 5000;
 app.use(cors());
 
 app.get('/', (req, res) => {
