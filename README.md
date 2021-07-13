@@ -13,7 +13,8 @@ This is fast cause built with ExpressJS, and for basic use, this api provide 2 m
 
 ## Live Demo
 
-[santuke.herokuapp.com]https://santuke.herokuapp.com/
+- [Santuke API](https://santuke.herokuapp.com/)
+- [Santuke Swagger Docs](https://santuke.herokuapp.com/docs)
 
 
 ## Getting Started
