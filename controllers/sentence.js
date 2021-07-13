@@ -65,7 +65,7 @@ function parseSentences(file){
     Log.Sys(filtered.length + " sentences collected", true);
     const random = Math.floor(Math.random() * filtered.length);
     Log.Sys("returning sentences[" + random + "] " + filtered[random], true);
-    return filtered[random];
+    return filtered[random].replace("\r", "");
 }
 
 module.exports = {
