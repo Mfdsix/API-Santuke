@@ -1,0 +1,74 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Santuke",
+        "description": "generate random sentences from many languages",
+        "license": {
+            "name": "ISC",
+            "url": "https://opensource.org/licenses/ISC"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Sentences",
+            "description": "generate random sentences"
+        }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/rand": {
+            "get": {
+                "tags": ["Sentences"],
+                "description": "get totally random sentence",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Sentence"
+                        }
+                    }
+                }
+            }
+        },
+        "/rand/{lang}": {
+            "get": {
+                "tags": ["Sentences"],
+                "description": "get random sentence from specific supported language",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "lang",
+                        "type": "string",
+                        "description": "Language code"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Sentence"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Sentence": {
+            "required": ["text", "lang"],
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "lang": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
