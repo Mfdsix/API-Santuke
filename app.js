@@ -7,6 +7,7 @@ const Log = require('./utils/log');
 
 const swaggerDocument = require('./swagger.json');
 const app = express();
+const host = process.env.HOST || '0.0.0.0';
 const port = process.env.POST || 5000;
 app.use(cors());
 
@@ -28,7 +29,7 @@ app.get('/rand/:lang', async (req, res) => {
     res.send(await SentenceController.getByLang(lang));
 });
 
-app.listen(port, () => {
+app.listen(port, host, () => {
     console.log("--------------------------------");
     console.log("--------------------------------");
     console.log("   Santuke HAS BEEN SUMMONED    ");
