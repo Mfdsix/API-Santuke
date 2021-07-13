@@ -2,7 +2,7 @@
 
 > This is Sentence API built with Express JS, to help you get random sentence from many languages.
 
-![screenshot](./app_screenshot.png)
+![screenshot](./santuke.png)
 
 This is fast cause built with ExpressJS, and for basic use, this api provide 2 main routes. One for totally get random sentence, and another one is for get random sentence from specific language.
 
