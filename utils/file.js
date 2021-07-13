@@ -2,26 +2,20 @@ const Log = require('../utils/log');
 const fs = require('fs');
 
 const fileExists = (filePath) => {
-    try
-    {
-        return fs.existsSync("../" + filePath);
-    }
-    catch (err)
-    {
+    try {
+        fs.accessSync(filePath, fs.constants.R_OK | fs.constants.W_OK);
+        return true;
+    } catch (err) {
         Log.Sys(err);
         return false;
     }
 }
 
-const readFile = (filePath) => {
+const readFile = async (filePath) => {
     try{
-        fs.readFile('../' + filePath, 'utf8', (err, data) => {
-            if(err) {
-                return false;
-            }else{
-                return data;
-            }
-        });
+        const read = fs.readFileSync(filePath, 'utf8');
+        Log.Sys("successfully read file " + filePath, true);
+        return read;
     }catch(err){
         Log.Sys(err);
         return false;

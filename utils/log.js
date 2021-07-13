@@ -8,7 +8,7 @@ const E = (message) => {
 }
 // system log
 const Sys = (object, success = false) => {
-    const prefix = "-Sys | log \n";
+    const prefix = "-sys | log \n";
     if(success){
         console.log(prefix, object);
     }else{

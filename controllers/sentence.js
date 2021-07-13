@@ -16,30 +16,38 @@ const LANGUAGES = [
     // you register more language, this represent filenames in lang folder
 ];
 
-const get = () => {
+const get = async () => {
     const random = Math.floor(Math.random() * LANGUAGES.length);
     const lang = LANGUAGES[random];
-    return getSentence(lang);
+    return await getSentence(lang);
 }
 
-const getByLang = (lang) => {
-    return getSentence(lang);
+const getByLang = async (lang) => {
+    return await getSentence(lang);
 }
 
-function getSentence(lang) {
+async function getSentence(lang) {
+
+    if(!LANGUAGES.includes(lang)) return ResponseUtil.errResponse("Language not supported");
+
     const filepath = 'lang/' + lang + '.txt';
     if(FileUtil.fileExists(filepath)) {
-        const readFile = FileUtil.readFile(filepath);
+        const readFile = await FileUtil.readFile(filepath);
         if(!readFile){
             const message = "Failed to load file " + filepath;
-
+            
             Log.E(message);
             return ResponseUtil.errResponse(message);
         }
-        return ResponseUtil.succResponse(parseSentences(readFile));
+        
+        const sentence = parseSentences(readFile);
+        return ResponseUtil.succResponse({
+            "lang": lang,
+            "text": sentence
+        });
     }else{
         const message = "File doesn't exist " + filepath;
-
+        
         Log.E(message);
         return ResponseUtil.errResponse(message);
     }
@@ -47,13 +55,17 @@ function getSentence(lang) {
 
 function parseSentences(file){
     const explodes = file.split("\n");
-    explodes.forEach((v, i) => {
-        if(v.includes("---")){
-            explodes.splice(i, 1);
+    const filtered = [];
+
+    explodes.forEach((v) => {
+        if(!v.includes("---")){
+            filtered.push(v);
         }
     })
-    const random = Math.floor(Math.random() * explodes.length);
-    return explodes[random];
+    Log.Sys(filtered.length + " sentences collected", true);
+    const random = Math.floor(Math.random() * filtered.length);
+    Log.Sys("returning sentences[" + random + "] " + filtered[random], true);
+    return filtered[random];
 }
 
 module.exports = {

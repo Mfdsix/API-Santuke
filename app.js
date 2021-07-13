@@ -12,14 +12,14 @@ app.get('/', (req, res) => {
     Log.R("/");
     res.send("You've hit Santuke");
 })
-app.get('/rand', (req, res) => {
+app.get('/rand', async (req, res) => {
     Log.R("/rand");
-    res.send(SentenceController.get());
+    res.send(await SentenceController.get());
 });
-app.get('/rand/:lang', (req, res) => {
+app.get('/rand/:lang', async (req, res) => {
     const lang = req.params.lang;
     Log.R("hit - /rand/" + lang);
-    res.send(SentenceController.getByLang(lang));
+    res.send(await SentenceController.getByLang(lang));
 });
 
 app.listen(port, () => {
