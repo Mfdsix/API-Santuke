@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     Log.R("/");
     res.send("You've hit Santuke");
 })
-app.use('/api-docs',
+app.use('/docs',
     swaggerUi.serve, 
     swaggerUi.setup(swaggerDocument)
 );
