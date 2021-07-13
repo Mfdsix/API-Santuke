@@ -1,19 +1,25 @@
 const express = require('express');
 const cors = require('cors');
 
+const SentenceController = require('./controllers/sentence');
+const Log = require('./utils/log');
+
 const app = express();
 const port = 3000;
 app.use(cors());
 
 app.get('/', (req, res) => {
+    Log.R("/");
     res.send("You've hit Santuke");
 })
 app.get('/rand', (req, res) => {
-    // TODO - return random sentences from random language
+    Log.R("/rand");
+    res.send(SentenceController.get());
 });
-app.get('/rand/:country', (req, res) => {
-    const country = req.params.country;
-    // TODO - return random sentences from selected language
+app.get('/rand/:lang', (req, res) => {
+    const lang = req.params.lang;
+    Log.R("hit - /rand/" + lang);
+    res.send(SentenceController.getByLang(lang));
 });
 
 app.listen(port, () => {
